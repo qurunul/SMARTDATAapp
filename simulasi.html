@@ -5,234 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SmartData - Simulasi Risiko</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-<style>
-    *, *::before, *::after {
-        box-sizing: border-box;
-    }
-    body, h1, p, ul, li, a, button, label, select, nav {
-        margin: 0; padding: 0;
-        font-family: 'Poppins', sans-serif;
-    }
-    body {
-        background: linear-gradient(135deg, #1e3c72, #2a5298);
-        color: #f1f1f1;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
-    nav {
-        background: rgba(0,26,80,0.85);
-        backdrop-filter: saturate(180%) blur(20px);
-        padding: 1rem 2rem;
-        box-shadow: 0 8px 12px rgba(0, 26, 80, 0.9);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        display: flex;
-        justify-content: center;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-    }
-    .nav-logo {
-        position: absolute;
-        left: 2rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 1.25rem;
-        font-weight: 900;
-        color: #78bfff;
-        cursor: pointer;
-        user-select: none;
-        text-shadow: 0 2px 6px rgba(0,0,0,0.9);
-    }
-    .nav-logo img {
-        height: 36px;
-        width: 36px;
-        object-fit: contain;
-    }
-    nav ul {
-        display: flex;
-        list-style: none;
-        gap: 2rem;
-    }
-    nav ul li a {
-        position: relative;
-        font-size: 1.1rem;
-        padding: 0.5rem 0;
-        transition: color 0.3s ease;
-    }
-    nav ul li a::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 3px;
-        bottom: 0;
-        left: 0;
-        background: #78bfff;
-        transition: width 0.3s ease;
-        border-radius: 3px;
-    }
-    nav ul li a:hover,
-    nav ul li a.active {
-        color: #78bfff;
-    }
-    nav ul li a:hover::after,
-    nav ul li a.active::after {
-        width: 100%;
-    }
-    main {
-        max-width: 600px;
-        margin: 3rem auto 4rem;
-        background: rgba(255,255,255,0.05);
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.35);
-        padding: 3rem 2.5rem;
-        backdrop-filter: saturate(180%) blur(15px);
-        color: #e1e9f1;
-        flex-grow: 1;
-    }
-    h1 {
-        color: #ccdefa;
-        font-size: 2.6rem;
-        margin-bottom: 1.5rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        text-align: center;
-    }
-    label {
-        display: block;
-        font-weight: 600;
-        font-size: 1.2rem;
-        margin-bottom: 0.8rem;
-        color: #a3bffa;
-        user-select: none;
-    }
-    select {
-        width: 100%;
-        font-size: 1.1rem;
-        padding: 0.6rem 1rem;
-        border-radius: 8px;
-        border: none;
-        outline: none;
-        background-color: rgba(255,255,255,0.15);
-        color: #f1f1f1;
-        font-weight: 600;
-        box-shadow: inset 1px 1px 6px rgba(0,0,0,0.3);
-        transition: background-color 0.3s ease;
-        margin-bottom: 2rem;
-        appearance: none;
-        cursor: pointer;
-    }
-    select:hover, select:focus {
-        background-color: rgba(255,255,255,0.3);
-    }
-    button {
-        width: 100%;
-        max-width: 280px;
-        display: block;
-        margin: 0 auto 2.5rem;
-        background: linear-gradient(135deg, #4c7af2, #6bc1ff);
-        color: #0a1d50;
-        border: none;
-        border-radius: 40px;
-        padding: 0.9rem 2rem;
-        font-weight: 700;
-        font-size: 1.25rem;
-        cursor: pointer;
-        box-shadow: 0 8px 15px rgba(75,152,255,0.7);
-        transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
-        text-shadow: 0 1px 2px rgba(255,255,255,0.65);
-        letter-spacing: 0.06em;
-        user-select: none;
-    }
-    button:hover {
-        background: linear-gradient(135deg, #6bc1ff, #4c7af2);
-        box-shadow: 0 12px 20px rgba(107,193,255,0.85);
-        transform: translateY(-4px);
-    }
-    button:active {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 10px rgba(107,193,255,0.6);
-    }
-    #hasil-simulasi {
-        background-color: rgba(255,255,255,0.15);
-        border-left: 6px solid #6bc1ff;
-        padding: 1.3rem 1.5rem;
-        border-radius: 8px;
-        font-size: 1.2rem;
-        line-height: 1.6;
-        min-height: 120px;
-        color: #e0e7ff;
-        user-select: text;
-        white-space: pre-line;
-        box-shadow: inset 0 0 12px rgba(107,193,255,0.5);
-        transition: background-color 0.3s ease;
-    }
-    footer {
-        text-align: center;
-        padding: 1.3rem 1rem;
-        background: rgba(0,26,80,0.85);
-        color: #9bb9ff;
-        font-size: 0.95rem;
-        font-weight: 600;
-        user-select: none;
-        letter-spacing: 0.05em;
-        box-shadow: inset 0 1px 5px rgba(255,255,255,0.1);
-    }
-    /* Responsive */
-    @media (max-width: 480px) {
-        main {
-            margin: 2rem 1.2rem 3.5rem;
-            padding: 2rem 1.5rem;
-            max-width: 100%;
-            border-radius: 12px;
-        }
-        h1 {
-            font-size: 2rem;
-        }
-        label {
-            font-size: 1.1rem;
-        }
-        select {
-            font-size: 1rem;
-            padding: 0.5rem 0.8rem;
-        }
-        button {
-            font-size: 1.15rem;
-            padding: 0.8rem 1.8rem;
-        }
-        #hasil-simulasi {
-            font-size: 1rem;
-            padding: 1rem 1.2rem;
-        }
-        nav ul {
-            gap: 1rem;
-        }
-        nav ul li a {
-            font-size: 1rem;
-        }
-    }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<nav>
-    <a href="index.html" class="nav-logo" aria-label="Beranda SmartData">
+<nav class="navbar">
+    <div class="brand-title">
+        <a href="index.html" class="nav-logo" aria-label="Beranda SmartData">
         <img src="logo.png" alt="Logo SmartData" />
         SmartData
     </a>
-    <ul>
-        <li><a href="index.html">Beranda</a></li>
+    </div>
+    <ul class="navbar-links">
+        <li><a href="index.html" class="active" aria-current="page">Beranda</a></li>
         <li><a href="kuis.html">Kuis</a></li>
-        <li><a href="simulasi.html" class="active" aria-current="page">Simulasi</a></li>
+        <li><a href="simulasi.html">Simulasi</a></li>
         <li><a href="tips.html">Tips Keamanan</a></li>
         <li><a href="tentang.html">Tentang</a></li>
     </ul>
+    <div class="toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
 </nav>
 <main>
     <h1>🎯 Simulasi Risiko Kebocoran Data</h1>
@@ -252,38 +46,6 @@
 <footer>
     &copy; 2025 SmartData. Semua hak dilindungi.
 </footer>
-<script>
-    function simulasiRisiko() {
-        const select = document.getElementById('data-pribadi');
-        const hasil = document.getElementById('hasil-simulasi');
-        const data = select.value;
-
-        if (!data) {
-            hasil.textContent = "Mohon pilih jenis data pribadi untuk melihat risiko.";
-            return;
-        }
-
-        let output = '';
-
-        switch(data) {
-            case 'nik':
-                output = "Risiko nyata jika bocor:\n- Pencurian identitas (identity theft).\n- Pendaftaran pinjaman ilegal ilegal atas nama Anda.\n- Penyalahgunaan dalam pembuatan akun palsu (bank, SIM card, e-wallet, dsb).\n- Potensi penyalahgunaan untuk pengalihan hak atau keperluan hukum tanpa sepengetahuan.\n Ciri-Ciri yang Bisa Dikenali:\n- Menerima tagihan pinjaman online yang tidak pernah Anda ajukan.\n- Mendapat notifikasi verifikasi akun dari layanan yang tidak Anda daftarkan.\n- Nama Anda muncul di daftar hutang pinjol di aplikasi pihak ketiga (misalnya: cek BI Checking / SLIK OJK).";
-                break;
-            case 'nomor_hp':
-                output = "Risiko Nyata Jika Bocor:\n- Penipuan melalui telepon atau WhatsApp (modus OTP palsu, undangan link berbahaya).\n- Nomor Anda dijadikan target spam, robo-call, dan iklan tidak diinginkan.\n- Potensi SIM-swap (pencurian nomor SIM untuk ambil alih akun WhatsApp, Telegram, dsb).\n- Digunakan untuk registrasi akun layanan digital secara ilegal.\n Ciri-Ciri yang Bisa Dikenali:\n- Sering menerima panggilan mencurigakan atau SMS dari nomor tak dikenal.\n- Mendapat permintaan OTP dari layanan yang tidak Anda gunakan.\n- Nomor WhatsApp Anda tiba-tiba logout tanpa alasan (indikasi SIM swap).\n- Kontak Anda menerima pesan mencurigakan seolah dari Anda.";
-                break;
-            case 'email':
-                output = "Risiko Nyata Jika Bocor:\n- Serangan phishing (email jebakan) dengan mengaku dari bank, kampus, atau platform belanja.\n- Akses ilegal ke akun media sosial atau platform lain jika password email sama.\n- Masuk ke daftar spam global, menyebabkan inbox dibanjiri iklan / malware.\n- Email dijadikan sarana menyebar hoaks atau pemerasan digital.\n Ciri-Ciri yang Bisa Dikenali:\n- Menerima email dari pengirim asing yang berisi tautan mencurigakan.\n- Tiba-tiba logout dari akun email atau akun lain yang tertaut.\n- Mendapat email percobaan login gagal dari lokasi yang tidak dikenal.\n- Email digunakan untuk reset password layanan lain tanpa seizin Anda.";
-                break;
-            case 'nama_ibu':
-                output = "Risiko Nyata Jika Bocor:\n- Menjawab pertanyaan keamanan akun digital (banyak sistem masih pakai ini!).\n- Dapat digunakan untuk mengakses akun bank melalui call center.\n- Membantu pelaku menyusun serangan social engineering yang lebih meyakinkan (profiling identitas).\n Ciri-Ciri yang Bisa Dikenali:\n- Akun Anda diakses meskipun tidak membagikan password, karena pelaku berhasil menjawab pertanyaan keamanan.\n- Pihak bank atau layanan online menghubungi Anda tentang aktivitas mencurigakan padahal Anda tidak pernah mengajukan.\n- Ada perubahan atau reset akun tanpa permintaan dari Anda.";
-                break;
-            default:
-                output = "Pilih jenis data untuk melihat risiko nyata yang bisa terjadi.";
-        }
-
-        hasil.textContent = output;
-    }
-</script>
+<script src="script.js"></script>
 </body>
 </html>
