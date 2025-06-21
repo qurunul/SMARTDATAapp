@@ -152,12 +152,17 @@ main {
     backdrop-filter: saturate(180%) blur(15px);
 }
 .question {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 .question h3 {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     color: #ffffff;
     line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
 }
 .question h4 {
     margin-bottom: 10px;
@@ -166,47 +171,91 @@ main {
 /* --------- Tooltip Styles ---------- */
 .tooltip {
     position: relative;
-    background: rgba(0,0,0,0.3);
-    padding: 5px 12px;
-    margin-left: 5px;
-    margin-top: -30px;
-    border-radius: 100%;
-    font-size: 20px;
+    background: rgba(120,191,255,0.2);
+    color: #78bfff;
+    border: 1px solid rgba(120,191,255,0.4);
+    padding: 4px 8px;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
     cursor: help;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-left: 8px;
+    z-index: 10;
 }
 .tooltip::after,
 .tooltip::before {
     position: absolute;
     left: 50%;
     opacity: 0;
-    transition: allease0.3s;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
 }
 .tooltip::before {
     content: "";
-    border-width: 10px 8px 8px;
+    border-width: 8px 6px 0 6px;
     border-style: solid;
-    border-color: rgba(0,0,0,0.3) transparent transparent transparent;
-    top: -20px;
-    margin-left: -8px;
+    border-color: rgba(0,0,0,0.9) transparent transparent transparent;
+    bottom: -8px;
+    margin-left: -6px;
+    transform: translateY(-5px);
 }
 .tooltip::after {
     content: attr(data-tooltip);
-    background: rgba(0,0,0,0.3);
-    top: -20px;
-    transform: translateY(-100%);
-    font-size: 14px;
-    margin-left: -150px;
-    width: 300px;
-    border-radius: 10px;
+    background: rgba(0,0,0,0.9);
+    bottom: -8px;
+    transform: translateY(-100%) translateX(-50%);
+    font-size: 13px;
+    width: 320px;
+    border-radius: 8px;
     color: #fff;
-    padding: 14px;
-    transition: opacity 0.2s ease;
+    padding: 12px 15px;
+    line-height: 1.4;
+    font-weight: normal;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    white-space: pre-line;
 }
 /* Hover Tooltip states */
 .tooltip:hover::after,
 .tooltip:hover::before {
     opacity: 1;
+    transform: translateY(-100%) translateX(-50%);
 }
+.tooltip:hover::before {
+    transform: translateY(-5px) translateX(-50%);
+}
+
+/* Quiz answer labels styling */
+.question label {
+    display: block;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: #d6deff;
+    user-select: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+    position: relative;
+}
+
+.question label:hover {
+    background-color: rgba(255,255,255,0.08);
+}
+
+.question input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
 .container {
     max-width: 720px;
     margin: 3rem auto;
@@ -642,13 +691,16 @@ footer {
     .toggle {
         display: flex;
     }
-    .tooltip {
-        margin-top: -20px;
-    }
     .tooltip::after {
-        width: 250px;
-        margin-left: -125px;
+        width: 280px;
         font-size: 12px;
+        margin-left: -140px;
+        left: 50%;
+        transform: translateY(-100%) translateX(-50%);
+    }
+    .tooltip::before {
+        margin-left: -6px;
+        left: 50%;
     }
     #hasil-simulasi {
         font-size: 1rem;
