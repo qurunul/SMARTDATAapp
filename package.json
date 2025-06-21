@@ -1,0 +1,17 @@
+{
+  "name": "smartdata",
+  "version": "1.0.0",
+  "description": "SmartData - Aplikasi edukasi keamanan data pribadi",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python3 -m http.server 3000",
+    "start": "python3 -m http.server 3000",
+    "build": "echo 'Static site - no build needed'",
+    "preview": "python3 -m http.server 4173"
+  },
+  "keywords": ["cybersecurity", "data-privacy", "education"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
